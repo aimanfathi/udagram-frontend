@@ -11,7 +11,7 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 RUN npm install -g @ionic/cli
-RUN ionic init
+RUN ionic init "udacity-c2-frontend" --type=angular
 RUN ionic build
 RUN ionic serve
 
