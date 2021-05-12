@@ -1,5 +1,5 @@
-# Use NodeJS base image
-FROM node:12
+# Use Ionic base image
+FROM beevelop/ionic AS ionic
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -13,9 +13,9 @@ RUN npm install
 
 # Copy app source
 COPY . .
+RUN ionic build
 
-# Bind the port that the image will run on
-EXPOSE 8100
-
-# Define the Docker image's behavior at runtime
-CMD ["npm", "run", "dev"]
+## Run 
+FROM nginx:alpine
+#COPY www /usr/share/nginx/html
+COPY --from=ionic  /usr/src/app/www /usr/share/nginx/html
